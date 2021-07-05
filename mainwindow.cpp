@@ -3,12 +3,9 @@
 #include <utility>
 // BMI data taken from
 // https://www.calculator.net/bmi-calculator.html?ctype=metric&cage=25&csex=m&cheightfeet=5&cheightinch=10&cpound=160&cheightmeter=180&ckg=65&printit=0
+int weightMeasure = 0;
 
 
-// Unused code
-/*
-
-*/
 
 
 
@@ -16,18 +13,16 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    initializeVector
-
-
-
-
-
 
 ui->setupUi(this);
-connect(ui->chkState, SIGNAL(clicked()), this, SLOT(object->chkState();));
-    }
+//connect(ui->weightInput, SIGNAL(valueChanged(double)), this, MainWindow::weightCalc());
+}
 
+void MainWindow::weightCalc(int arg1) {
+weightMeasure = arg1;
+ui->bmiLabel->setText("sex");
 
+}
 
 
 MainWindow::~MainWindow()
@@ -37,12 +32,14 @@ MainWindow::~MainWindow()
 
 
 void bmiCalculator() {
-
+//
 }
 
-void MainWindow::on_weightInput_valueChanged(const QString &arg1)
-{
 
-    bmiCalculator();
+
+void MainWindow::on_ageInput_valueChanged(double arg1)
+{
+QString numString = QString::number(arg1);
+ ui->bmiLabel->setText(numString);
 }
 

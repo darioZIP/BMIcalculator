@@ -14,12 +14,17 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void weightCalc();
 
 private slots:
-    void on_weightInput_valueChanged(const QString &arg1);
+    // void on_weightInput_valueChanged(const QString &arg1);
+
+
+    void on_ageInput_valueChanged(double arg1);
 
 private:
     Ui::MainWindow *ui;
     void bmiCalculator();
+    void weightCalc(int arg1);
 };
 #endif // MAINWINDOW_H
