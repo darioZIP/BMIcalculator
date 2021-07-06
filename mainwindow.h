@@ -22,9 +22,18 @@ private slots:
 
     void on_ageInput_valueChanged(double arg1);
 
+    void on_weightInput_valueChanged(double arg1);
+
+    void on_ageInput_valueChanged(int arg1);
+
+    void on_heightInput_valueChanged(double arg1);
+
+    void on_calculateButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     void bmiCalculator();
     void weightCalc(int arg1);
+    void valuesCheckpoint();
 };
 #endif // MAINWINDOW_H
