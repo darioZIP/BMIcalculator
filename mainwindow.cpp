@@ -51,10 +51,12 @@ void MainWindow::on_ageInput_valueChanged(int arg1)
 {
    ageMeasure = arg1;
    if (ageMeasure <18) {
-       ui->maleRadio->setChecked(false);
+       ui->maleRadio->setEnabled(true);
+       ui->femaleRadio->setEnabled(true);
    }
    else {
-   ui->maleRadio->setChecked(true);
+   ui->maleRadio->setEnabled(false);
+   ui->femaleRadio->setEnabled(false);
    }
    valuesCheckpoint();
 }
@@ -83,8 +85,4 @@ void MainWindow::bmiCalculator() {
 
 }
 
-void MainWindow::on_calculateButton_clicked()
-{
-    bmiCalculator();
-}
 
