@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include <utility>
 #include <cmath>
+#include <csv.hpp>
 
 // BMI data taken from
 // https://www.calculator.net/bmi-calculator.html?ctype=metric&cage=25&csex=m&cheightfeet=5&cheightinch=10&cpound=160&cheightmeter=180&ckg=65&printit=0
@@ -42,22 +43,36 @@ MainWindow::~MainWindow()
 void MainWindow::on_weightInput_valueChanged(double arg1)
 {
     weightMeasure = arg1;
+
+
+
+
+
+
+
     valuesCheckpoint();
 
+
+
+}
+
+void MainWindow::genderRadioToggle(){
+
+    if (ageMeasure <18) {
+        ui->maleRadio->setEnabled(true);
+        ui->femaleRadio->setEnabled(true);
+    }
+    else {
+    ui->maleRadio->setEnabled(false);
+    ui->femaleRadio->setEnabled(false);
+    }
 }
 
 
 void MainWindow::on_ageInput_valueChanged(int arg1)
 {
    ageMeasure = arg1;
-   if (ageMeasure <18) {
-       ui->maleRadio->setEnabled(true);
-       ui->femaleRadio->setEnabled(true);
-   }
-   else {
-   ui->maleRadio->setEnabled(false);
-   ui->femaleRadio->setEnabled(false);
-   }
+   genderRadioToggle();
    valuesCheckpoint();
 }
 
@@ -73,16 +88,31 @@ void MainWindow::on_heightInput_valueChanged(double arg1)
 void MainWindow::valuesCheckpoint() {
 
 
-    if (weightMeasure != 0.00 && heightMeasure != 00)  {
+    if (weightMeasure != 0.00 && heightMeasure != 00 && ageMeasure != 0.00)  {
         bmiCalculator();
     }
 
 }
 
 void MainWindow::bmiCalculator() {
+
+    if (ui->weightPounds->isChecked()) {
+        // Can be refactored using a vector[index].
+weightMeasure = weightMeasure*2.20462;
+    }
+
+    if (ui->heightInches->isChecked()) {
+        heightMeasure = heightMeasure*0.3048;
+    }
+
+
+
    double bmiResult = weightMeasure / (heightMeasure*heightMeasure);
    ui->bmiLabel->setText(QString::number(std::trunc(bmiResult)));
 
 }
+
+
+
 
 

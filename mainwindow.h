@@ -35,5 +35,6 @@ private:
     void bmiCalculator();
     void weightCalc(int arg1);
     void valuesCheckpoint();
+    void genderRadioToggle();
 };
 #endif // MAINWINDOW_H

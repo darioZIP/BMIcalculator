@@ -28,3 +28,5 @@ CONFIG += embed_translations
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+INCLUDEPATH += "C:\Users\dario\bmiCalculator\csv-parser-2.1.1\include"
+
