@@ -30,11 +30,18 @@ private slots:
 
     void on_calculateButton_clicked();
 
+    void on_bmiDescription_selectionChanged();
+
+    void on_weightKG_clicked();
+
+    void on_weightPounds_clicked();
+
 private:
     Ui::MainWindow *ui;
     void bmiCalculator();
     void weightCalc(int arg1);
     void valuesCheckpoint();
     void genderRadioToggle();
+    void valuesConverter();
 };
 #endif // MAINWINDOW_H
