@@ -6,3 +6,5 @@ An advanced mode (will) be available with more parameters to get a better accura
 
 Written in C++. Might contain QClasses (I am using QT Creator as my IDE).
 Disclaimer: DO NOT take the results of this program as medical advice. 
+
+Using this CSV Parser library: https://github.com/vincentlaucsb/csv-parser#contributing
