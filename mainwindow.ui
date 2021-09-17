@@ -9,9 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>286</width>
-    <height>227</height>
+    <width>283</width>
+    <height>223</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>BMI Calculator</string>
@@ -22,11 +28,11 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>272</width>
-      <height>144</height>
+      <width>251</width>
+      <height>141</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
      <property name="sizeConstraint">
       <enum>QLayout::SetNoConstraint</enum>
      </property>
@@ -52,7 +58,7 @@
           <enum>QLayout::SetFixedSize</enum>
          </property>
          <item>
-          <widget class="QLabel" name="label_11">
+          <widget class="QLabel" name="ageLabel">
            <property name="maximumSize">
             <size>
              <width>40</width>
@@ -65,7 +71,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_12">
+          <widget class="QLabel" name="weightLabel">
            <property name="maximumSize">
             <size>
              <width>40</width>
@@ -81,7 +87,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_9">
+          <widget class="QLabel" name="heightLabel">
            <property name="maximumSize">
             <size>
              <width>40</width>
@@ -99,12 +105,19 @@
         </layout>
        </item>
        <item>
+        <widget class="Line" name="line_2">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <property name="sizeConstraint">
           <enum>QLayout::SetFixedSize</enum>
          </property>
          <item>
-          <widget class="QSpinBox" name="ageInput">
+          <widget class="QSpinBox" name="inputAge">
            <property name="acceptDrops">
             <bool>false</bool>
            </property>
@@ -123,7 +136,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="weightInput">
+          <widget class="QDoubleSpinBox" name="inputWeight">
            <property name="maximumSize">
             <size>
              <width>100</width>
@@ -145,7 +158,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QDoubleSpinBox" name="heightInput">
+          <widget class="QDoubleSpinBox" name="inputHeight">
            <property name="maximumSize">
             <size>
              <width>100</width>
@@ -206,7 +219,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="heightcm">
+          <widget class="QRadioButton" name="heightM">
            <property name="maximumSize">
             <size>
              <width>65</width>
@@ -227,7 +240,17 @@
         </layout>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout_5">
+        <widget class="Line" name="line_3">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <property name="sizeConstraint">
+          <enum>QLayout::SetFixedSize</enum>
+         </property>
          <item>
           <widget class="QRadioButton" name="femaleRadio">
            <property name="maximumSize">
@@ -258,7 +281,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="heightInches">
+          <widget class="QRadioButton" name="heightFeet">
            <property name="maximumSize">
             <size>
              <width>70</width>
@@ -266,7 +289,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Feet</string>
+            <string>Feet (ft)</string>
            </property>
            <attribute name="buttonGroup">
             <string notr="true">heightRadioGroup</string>
@@ -278,9 +301,16 @@
       </layout>
      </item>
      <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
       <layout class="QHBoxLayout" name="horizontalLayout_5">
        <item>
-        <widget class="QLabel" name="label_7">
+        <widget class="QLabel" name="bmiLabel">
          <property name="maximumSize">
           <size>
            <width>120</width>
@@ -300,7 +330,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="bmiLabel">
+        <widget class="QLabel" name="bmiResult">
          <property name="text">
           <string/>
          </property>
@@ -328,7 +358,7 @@
      <rect>
       <x>10</x>
       <y>160</y>
-      <width>271</width>
+      <width>241</width>
       <height>31</height>
      </rect>
     </property>
@@ -358,7 +388,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>286</width>
+     <width>283</width>
      <height>21</height>
     </rect>
    </property>
@@ -410,8 +440,8 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="genderGroup"/>
   <buttongroup name="weightRadioGroup"/>
   <buttongroup name="heightRadioGroup"/>
+  <buttongroup name="genderGroup"/>
  </buttongroups>
 </ui>

@@ -17,31 +17,28 @@ public:
     void weightCalc();
 
 private slots:
-    // void on_weightInput_valueChanged(const QString &arg1);
 
 
-    void on_ageInput_valueChanged(double arg1);
-
-    void on_weightInput_valueChanged(double arg1);
-
-    void on_ageInput_valueChanged(int arg1);
-
-    void on_heightInput_valueChanged(double arg1);
-
-    void on_calculateButton_clicked();
-
-    void on_bmiDescription_selectionChanged();
 
     void on_weightKG_clicked();
 
     void on_weightPounds_clicked();
 
+    void on_inputWeight_valueChanged(double arg1);
+
+    void on_heightM_clicked();
+
+    void on_heightFeet_clicked();
+
+    void on_inputHeight_valueChanged(double arg1);
+
 private:
     Ui::MainWindow *ui;
-    void bmiCalculator();
-    void weightCalc(int arg1);
-    void valuesCheckpoint();
-    void genderRadioToggle();
-    void valuesConverter();
+    std::string weightLog = "";
+
+    void spinBoxProperties(QString boxName, double singleStepVal, int decimalsVal);
+    void setValueBox(QString boxName, double value);
+    double valueConverter(double, double, char);
+
 };
 #endif // MAINWINDOW_H

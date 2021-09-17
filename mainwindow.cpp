@@ -3,31 +3,41 @@
 #include <utility>
 #include <cmath>
 #include <csv.hpp>
+#include <QDesktopServices>
+
+// Links from clickable buttons
+QString homepage = "https://github.com/dariopedroniDEV/BMIcalculator";
+QString donatePage = "https://dariopedroni.dev/donate/";
+
+// QMenu signals
+
+
 
 // BMI data taken from
 // https://www.calculator.net/bmi-calculator.html
 
 // Declaring variables. QPair holding user input but that can easily be changed.
-int ageMeasure = 0;
-QPair<double, double> weightMeasure; // first = KG | second = Pound
-QPair<double, double> heightMeasure; // first = CM | second = Feet
+int ageValue = 0;
+double weightValue = 0;
+double heightValue = 0;
+double mathResult = 0;
 
-// Bool for proper unit conversion
-bool weightToggle; // 0 = KG | 1 = Pounds
-bool heightToggle; // 0 = CM | 1 = Feet
+std::string weightLog = "KG";
+std::string heightLog= "M";
+
+//------------------------------------------------------------------------------------
+// Functioning code
 
 // Constructor
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-
 ui->setupUi(this);
-
-
-
+// Initializing QVectors with placeholder data, that will afterwards be assigned user-inputs.
 
 }
+
 
 // Deconstructor
 MainWindow::~MainWindow()
@@ -35,131 +45,146 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// --------- Weight Radio Toggle
+
+void MainWindow::on_inputWeight_valueChanged(double arg1)
+{
+    weightValue = arg1;
+}
+
+void MainWindow::on_inputHeight_valueChanged(double arg1)
+{
+    heightValue = arg1;
+}
+
+
+// ----------- UI Modifying Functions
+
+
+void MainWindow::spinBoxProperties(QString boxName, double singleStepVal, int decimalsVal) {
+
+    // Changing a QDoubleSpinBox values
+    MainWindow::findChild<QDoubleSpinBox*>(boxName)->setSingleStep(singleStepVal);
+    MainWindow::findChild<QDoubleSpinBox*>(boxName)->setDecimals(decimalsVal);
+
+
+}
+
+// Updating value of spinBox after conversion.
+void MainWindow::setValueBox(QString boxName, double value) {
+    MainWindow::findChild<QDoubleSpinBox*>(boxName)->setValue(value);
+}
+
+// ---- UI Signals Functions
+
 void MainWindow::on_weightKG_clicked()
 {
- weightToggle = 0;
- valuesConverter();
- ui->weightInput->setValue(weightMeasure.first);
+    // change singleStep and decimals on UI.
+
+
+    // if radio was set on feet, then convert weightInput.
+    // if radio was already set on KG, then do nothing.
+    if (weightLog != "KG") {
+
+        // Converting from Pound to KG
+        weightValue = valueConverter(weightValue, 2.205, '/');
+
+        // Updating value on UI element
+        setValueBox("inputWeight", weightValue);
+
+        weightLog = "KG";
+        // Changing weight spinbox wheel properties
+        spinBoxProperties("inputWeight", 5, 1);
+
+    }
 }
 
 void MainWindow::on_weightPounds_clicked()
 {
-   weightToggle = 1;
-   valuesConverter();
-   ui->weightInput->setValue(weightMeasure.second);
-}
-
-// ------------------------------------------------------------
-
-// Used to convert values when radio buttons are clicked.
-void MainWindow::valuesConverter() {
-
-    // KG to Pounds
-    if (weightToggle == 1) {
-        weightMeasure.first = weightMeasure.second*0.45359237;
-    }
-
-    // Pounds to KG
-    else {
-    weightMeasure.second = weightMeasure.first*2.20462;
-    }
-
-    // CM to feet
-    if (heightToggle == 1) {
-        heightMeasure.second = weightMeasure.first*0.45359237;
-    }
-    // Feet to CM
-    else {
-    weightMeasure.first = weightMeasure.second*30.48;
-    }
-
-    valuesCheckpoint();
-}
+    // change singleStep and decimals on UI.
 
 
+    // if radio was set on pounds, then convert weightInput.
+    // if radio was already set on KG, then do nothing.
+    if (weightLog != "pounds") {
+
+        // Converting from Pound to KG
+        weightValue = valueConverter(weightValue, 2.205, '*');
+
+        // Updating value on UI element
+        weightLog = "pounds";
+        // Changing weight spinbox wheel properties
+        setValueBox("inputWeight", weightValue);
+        spinBoxProperties("inputWeight", 10, 2);
 
 
-
-
-//---------------------------------------
-
-void MainWindow::on_ageInput_valueChanged(int arg1)
-{
-   ageMeasure = arg1;
-   genderRadioToggle();
-   valuesCheckpoint();
-}
-
-void MainWindow::genderRadioToggle(){
-
-    if (ageMeasure <18) {
-        ui->maleRadio->setEnabled(true);
-        ui->femaleRadio->setEnabled(true);
-    }
-    else {
-    ui->maleRadio->setEnabled(false);
-    ui->femaleRadio->setEnabled(false);
     }
 }
 
 
-void MainWindow::on_heightInput_valueChanged(double arg1)
-{
-    if (ui->heightcm->isEnabled()) {
-        heightMeasure.first = arg1;
+// Math Logic functions
+
+double MainWindow::valueConverter(double valueInput, double valueCalculator, char mathOperator) {
+
+
+    if (mathOperator == '*') {
+        mathResult = valueInput * valueCalculator;
     }
 
     else {
-        heightMeasure.second = arg1;
+        mathResult = valueInput / valueCalculator;
     }
 
-    valuesCheckpoint();
+    return mathResult;
 }
 
-// Signal for Age, Weight and Height. Will trigger the valuesCheckpoint.
-void MainWindow::on_weightInput_valueChanged(double arg1)
+
+
+
+
+
+
+
+void MainWindow::on_heightM_clicked()
 {
 
-if (ui->weightKG->isEnabled()) {
- weightMeasure.first = arg1;
-}
-
-else {
- weightMeasure.second = arg1;
-}
-
-    valuesCheckpoint();
-
-}
 
 
+    // if radio was set on feet then convert weightInput, otherwise do nothing.
 
+    if (heightLog != "M") {
 
+        // Converting from M to Feet
+        heightValue = valueConverter(heightValue, 3.281, '*');
 
-// Checking if value of age, weight and height are different than zero.
-// If yes, bmiCalculator is executed.
-void MainWindow::valuesCheckpoint() {
+        // Updating value on UI element
+        setValueBox("inputHeight", heightValue);
 
-    if ((weightMeasure.first || weightMeasure.second != 0.00) && (heightMeasure.first || heightMeasure.second != 0.00) && (ageMeasure != 0.00)) {
-        bmiCalculator();
+        weightLog = "M";
+        // Changing weight spinbox wheel properties
+        spinBoxProperties("inputHeight", 0.15, 2);
+
     }
-
 }
 
 
+void MainWindow::on_heightFeet_clicked()
+{
+    // if radio was set on feet then convert weightInput, otherwise do nothing.
 
+    if (heightLog != "feet") {
 
-void MainWindow::bmiCalculator() {
+        // Converting from Feet to M
+        heightValue = valueConverter(heightValue, 3.281, '/');
 
+        // Updating value on UI element
+        setValueBox("inputHeight", heightValue);
 
+        weightLog = "feet";
+        // Changing weight spinbox wheel properties
+        spinBoxProperties("inputHeight", 0.5, 2);
 
-   double bmiResult = weightMeasure.first / (heightMeasure.first*heightMeasure.first);
-   ui->bmiLabel->setText(QString::number(std::trunc(bmiResult)));
+    }
 }
-
-
-
 
 
 
