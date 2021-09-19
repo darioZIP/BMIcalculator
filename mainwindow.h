@@ -32,13 +32,20 @@ private slots:
 
     void on_inputHeight_valueChanged(double arg1);
 
+    void on_inputAge_valueChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
-    std::string weightLog = "";
+    std::string weightLog = "KG";
+    std::string heightLog= "M";
 
     void spinBoxProperties(QString boxName, double singleStepVal, int decimalsVal);
     void setValueBox(QString boxName, double value);
+
     double valueConverter(double, double, char);
+    bool valuesChecker(double value);
+    bool valuesChecker(int value);
+    void bmiCalculator();
 
 };
 #endif // MAINWINDOW_H

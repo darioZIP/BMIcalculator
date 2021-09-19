@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>283</width>
+    <width>317</width>
     <height>223</height>
    </rect>
   </property>
@@ -28,8 +28,8 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>251</width>
-      <height>141</height>
+      <width>293</width>
+      <height>154</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0">
@@ -388,8 +388,8 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>283</width>
-     <height>21</height>
+     <width>317</width>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuAbout">
@@ -440,8 +440,8 @@ p, li { white-space: pre-wrap; }
  <resources/>
  <connections/>
  <buttongroups>
+  <buttongroup name="genderGroup"/>
   <buttongroup name="weightRadioGroup"/>
   <buttongroup name="heightRadioGroup"/>
-  <buttongroup name="genderGroup"/>
  </buttongroups>
 </ui>
